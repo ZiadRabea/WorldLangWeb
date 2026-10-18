@@ -1,0 +1,166 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="{%static 'imgs/logo.png'%}" type="img/png">
+  <title>Login - FixBytek</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #F2EFE7;
+      --soft: #9ACBD0;
+      --mid: #48A6A7;
+      --strong: #2973B2;
+      --card-bg: #ffffff;
+      --muted-border: #e6e7e4;
+      --text: #21303a;
+      --radius: 12px;
+      --field-height: 44px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: var(--text);
+    }
+
+    .login-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      padding: 2rem;
+      width: 100%;
+      max-width: 380px;
+      border: 1px solid var(--muted-border);
+      text-align: center;
+    }
+
+    .login-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0.8rem;
+    }
+
+    .login-card h1 {
+      margin: 0 0 1.5rem 0;
+      font-size: 1.4rem;
+      color: var(--strong);
+    }
+
+    .field {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      height: var(--field-height);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--muted-border);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--mid);
+      box-shadow: 0 0 0 3px rgba(72,166,167,0.15);
+    }
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 0.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+      background: var(--mid);
+      color: #fff;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--strong);
+    }
+
+    .login-footer {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .login-footer a {
+      color: var(--strong);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  {% block content %}
+    {% if form.errors %}
+      <p style="color: #ff6b6b;">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+      {% endif %}
+    {% endif %}
+    <div class="login-card">
+      <img src="{%static 'imgs/logo.png'%}" alt="Logo">
+      <h1>FixBytek Admin Login</h1>
+      <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="field">
+        <label for="email">Username</label>
+        {{form.username}}
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        {{form.password}}
+      </div>
+
+      <button class="btn" type="submit">Login</button>
+      {% if next %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      {% else %}
+        <input type="hidden" name="next" value="/" />
+      {% endif %}
+    </form>
+
+    <div class="login-footer">
+      <p>Forgot your password? <a href="{% url 'password_reset' %}">Reset</a></p>
+    </div>
+  </div>
+  {% endblock %}
+
+  <script>
+    document.getElementById("id_username").placeholder = "User_name";
+    document.getElementById("id_password").placeholder = "Password";
+  </script>
+</body>
+</html>

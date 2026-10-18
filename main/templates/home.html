@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coloring Magic ✨</title>
+    <meta name="description" content="Turn a photo into a printable coloring page in one tap.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+    <div class="page-sparkles" aria-hidden="true">
+        <span>✦</span><span>✧</span><span>•</span><span>✦</span><span>♡</span>
+    </div>
+
+    <main class="app-shell">
+        <header class="brand-header">
+            <div class="brand-mark" aria-hidden="true">🖍️</div>
+            <div>
+                <h1>Coloring Magic <span>✨</span></h1>
+                <p>Turn your photo into a coloring page!</p>
+            </div>
+        </header>
+
+        <section id="startView" class="start-view">
+            <div class="hero-copy">
+                <div class="sticker">SO EASY! 🎨</div>
+                <h2>Snap it.<br><strong>Color it.</strong></h2>
+                <p>Pick a photo and we'll turn it into clean, cute line art for you.</p>
+            </div>
+
+            <div class="upload-card" id="uploadCard">
+                <div class="upload-doodle doodle-one" aria-hidden="true">🌈</div>
+                <div class="upload-doodle doodle-two" aria-hidden="true">⭐</div>
+
+                <div class="upload-icon" aria-hidden="true">📸</div>
+                <h3>Ready, set, color!</h3>
+                <p>Take a picture or choose one from your device.</p>
+
+                <div class="upload-actions">
+                    <button class="big-button primary" id="cameraButton" type="button">
+                        <span class="button-icon">📷</span>
+                        <span>Take a picture</span>
+                    </button>
+                    <button class="big-button secondary" id="galleryButton" type="button">
+                        <span class="button-icon">🖼️</span>
+                        <span>Choose a photo</span>
+                    </button>
+                </div>
+
+                <input id="cameraInput" class="visually-hidden" type="file" accept="image/*" capture="environment">
+                <input id="galleryInput" class="visually-hidden" type="file" accept="image/*">
+
+                <div id="uploadError" class="message error" role="alert" hidden></div>
+                <div id="loadingMessage" class="loading-message" hidden>
+                    <div class="loader" aria-hidden="true">🖍️</div>
+                    <div>
+                        <strong>Drawing your coloring page…</strong>
+                        <span>Just a little magic ✨</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="tiny-note">No settings. No fuss. Just upload and go. 💛</p>
+        </section>
+
+        <section id="resultView" class="result-view" hidden>
+            <div class="result-heading">
+                <div>
+                    <div class="sticker">TA-DA! 🎉</div>
+                    <h2>Your coloring page is ready!</h2>
+                    <p>Grab your crayons and make it yours.</p>
+                </div>
+                <div class="result-badge">🖍️ Made for coloring</div>
+            </div>
+
+            <div class="paper-wrap">
+                <div class="paper-shadow"></div>
+                <div class="paper">
+                    <img id="resultImage" alt="Your generated coloring page">
+                </div>
+            </div>
+
+            <div id="resultError" class="message error" role="alert" hidden></div>
+
+            <div class="result-actions">
+                <button id="downloadButton" class="big-button primary" type="button">
+                    <span class="button-icon">⬇️</span>
+                    <span>Save coloring page</span>
+                </button>
+                <button id="printButton" class="big-button secondary" type="button">
+                    <span class="button-icon">🖨️</span>
+                    <span>Print it</span>
+                </button>
+                <button id="againButton" class="again-button" type="button">✨ Make another one</button>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>Made with a little AI magic ✨</span>
+        </footer>
+    </main>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
